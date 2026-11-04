@@ -17,24 +17,23 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      HUGO_VERSION: v0.169.0 # 👈 替换成你本地运行 hugo version 显示的版本号
     steps:
-      - name: Install Hugo CLI
-        run: |
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
-          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
-          
       - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: recursive
           fetch-depth: 0
-          
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest' # 这里直接使用最新版，不用管本地版本
+          extended: true
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
-        
+
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
@@ -43,7 +42,7 @@ jobs:
           hugo \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
-            
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
