@@ -1,0 +1,33 @@
+{{ define "main" }}
+<nav class="breadcrumb">
+  <a href="{{ "/" | relURL }}">{{ site.Params.boardName }}</a> <span>&gt;&gt;</span> {{ .Title }}
+</nav>
+<article class="thread">
+  <div class="post-meta">
+    <a class="post-no" href="{{ .RelPermalink }}">{{ site.Params.ui.colNo }}{{ partial "post-id.html" . }}</a>
+    <span class="post-author">{{ site.Params.author }}</span>
+    <span class="post-time">{{ partial "time.html" .Date }}</span>
+    <span class="post-id">{{ site.Params.ui.idPrefix }}{{ site.Params.authorId }}</span>
+    <span class="po">{{ site.Params.ui.poLabel }}</span>
+    {{- with .Params.categories }}<span class="post-cat">[{{ delimit . " / " }}]</span>{{ end }}
+  </div>
+  <h1 class="post-title">{{ .Title }}</h1>
+  <div class="post-content">
+    {{ .Content }}
+  </div>
+  <div class="post-footer">
+    <span class="quote-link">&gt;&gt;{{ site.Params.ui.colNo }}{{ partial "post-id.html" . }}</span>
+    {{- with .Params.tags }}<span class="post-tags">
+      {{- range . }}{{ $tag := . }}{{ with site.GetPage (printf "/tags/%s" $tag) }}<a href="{{ .RelPermalink }}">[{{ $tag }}]</a> {{ end }}{{ end -}}
+    </span>{{ end }}
+    {{- if .Lastmod.After .Date }}<span class="post-edited">{{ printf site.Params.ui.lastModified (partial "time.html" .Lastmod) }}</span>{{ end }}
+  </div>
+</article>
+<div class="thread-status">{{ printf site.Params.ui.threadStatus 0 .WordCount (partial "time.html" .Date) }}</div>
+<nav class="thread-nav">
+  <a href="{{ "/" | relURL }}">&lt;&lt; {{ site.Params.ui.backLabel }}{{ site.Params.boardName }}</a>
+  <span class="spacer"></span>
+  {{- with .PrevInSection }}<a href="{{ .RelPermalink }}">&lt; {{ site.Params.ui.prevThread }}</a>{{ end }}
+  {{- with .NextInSection }}<a href="{{ .RelPermalink }}">{{ site.Params.ui.nextThread }} &gt;</a>{{ end }}
+</nav>
+{{ end }}

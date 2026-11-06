@@ -1,0 +1,9 @@
+{{ define "main" }}
+<div class="notice">
+  <strong>※ {{ .Title }}</strong>
+  {{ printf site.Params.ui.listCount (len .Pages) }}
+</div>
+{{- $paginator := .Paginate .Pages }}
+{{ partial "thread-list.html" $paginator.Pages }}
+{{ partial "pagination.html" $paginator }}
+{{ end }}

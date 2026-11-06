@@ -1,0 +1,7 @@
+{{ define "main" }}
+<div class="error-page">
+  <div class="error-code">404</div>
+  <p>{{ site.Params.ui.notFoundTitle }}</p>
+  <p><a href="{{ "/" | relURL }}">&lt;&lt; {{ site.Params.ui.backLabel }}{{ site.Params.boardName }}</a></p>
+</div>
+{{ end }}

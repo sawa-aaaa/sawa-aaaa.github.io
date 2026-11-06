@@ -1,0 +1,11 @@
+{{- if gt .TotalPages 1 }}
+<div class="pagination">
+  {{- if .HasPrev }}<a href="{{ .Prev.URL }}">{{ site.Params.ui.paginationPrev }}</a>{{ end }}
+  {{- range .Pagers }}
+    {{- if eq .PageNumber $.PageNumber }}<span class="current">{{ .PageNumber }}</span>
+    {{- else }}<a href="{{ .URL }}">{{ .PageNumber }}</a>{{ end }}
+  {{- end }}
+  {{- if .HasNext }}<a href="{{ .Next.URL }}">{{ site.Params.ui.paginationNext }}</a>{{ end }}
+  <span class="page-info">{{ printf site.Params.ui.paginationInfo .PageNumber .TotalPages }}</span>
+</div>
+{{- end }}

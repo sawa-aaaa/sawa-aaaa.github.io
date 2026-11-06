@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Locale | default "zh-CN" }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body id="top">
+  <div class="container">
+    {{ partial "header.html" . }}
+    <main id="main">
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "footer.html" . }}
+  </div>
+  <a class="to-top" href="#top" title="{{ site.Params.ui.toTopTitle }}">{{ site.Params.ui.toTop }}</a>
+</body>
+</html>

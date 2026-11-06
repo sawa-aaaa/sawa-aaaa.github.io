@@ -1,0 +1,2 @@
+{{- $w := index (split site.Params.ui.weekdays ",") (int .Weekday) -}}
+{{- .Format "2006-01-02" -}}({{ $w }}) {{ .Format "15:04:05" -}}

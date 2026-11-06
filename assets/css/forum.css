@@ -1,0 +1,496 @@
+/* ============================================================
+   Sawa岛 — 早期揭示板 / 论坛风格
+   参考 A岛（adnmb）的排版语言：小字号、宋体、蓝链接、
+   表格串列表、帖子头、No. 编号、>> 引用。
+   ============================================================ */
+
+:root {
+  --bg: #ffffff;
+  --fg: #1a1a1a;
+  --muted: #777777;
+  --line: #cccccc;
+  --line-soft: #e3e3e3;
+  --link: #0000ee;
+  --visited: #551a8b;
+  --accent: #b00000;
+  --panel: #f7f7f7;
+  --panel-2: #efefef;
+  --code-bg: #f5f5f5;
+  --width: 1000px;
+  --font: Tahoma, "SimSun", "宋体", "Songti SC", serif;
+  --mono: Consolas, "Courier New", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 13px/1.75 var(--font);
+}
+
+a { color: var(--link); text-decoration: none; }
+a:visited { color: var(--visited); }
+a:hover { text-decoration: underline; }
+a:focus-visible { outline: 1px dotted #333; outline-offset: 2px; }
+
+.container {
+  width: 100%;
+  max-width: var(--width);
+  margin: 0 auto;
+  padding: 0 14px;
+}
+
+/* ---------------- 顶部 ---------------- */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 14px 0 6px;
+  border-bottom: 3px double var(--line);
+}
+
+.site-logo {
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #111;
+}
+.site-logo:visited { color: #111; }
+.site-logo .island { color: var(--accent); }
+.site-tagline {
+  margin-left: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.site-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  padding-bottom: 3px;
+}
+
+.nav-board {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.board-link {
+  font-size: 14px;
+  font-weight: bold;
+  color: #111;
+}
+.board-link:visited { color: #111; }
+
+.board-stats { font-size: 12px; color: var(--muted); font-weight: normal; }
+
+.nav-tags {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.nav-tags .tree {
+  font-family: var(--mono);
+  color: #aaa;
+  margin-right: 4px;
+}
+.nav-tags a {
+  margin-left: 8px;
+  color: var(--muted);
+}
+.nav-tags a:first-of-type { margin-left: 0; }
+.nav-tags a.active { font-weight: bold; color: #000; }
+.nav-tags a.active:visited { color: #000; }
+
+#main { padding-top: 10px; }
+
+/* ---------------- 版规 / 提示 ---------------- */
+
+.notice {
+  margin: 8px 0 10px;
+  padding: 6px 9px;
+  border: 1px dashed var(--line);
+  background: #fcfcfc;
+  color: #555;
+  font-size: 12px;
+}
+.notice strong { color: #333; }
+
+/* ---------------- 串列表 ---------------- */
+
+.thread-list {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.thread-list th {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  padding: 4px 7px;
+  font-size: 12px;
+  font-weight: normal;
+  color: #444;
+  text-align: left;
+}
+
+.thread-list td {
+  border-bottom: 1px dotted var(--line);
+  padding: 7px;
+  vertical-align: top;
+}
+
+.thread-list tbody tr:hover { background: #f5f8ff; }
+
+.col-no { width: 92px; }
+.col-author { width: 68px; }
+.col-reply { width: 46px; }
+.col-time { width: 168px; }
+
+.thread-list .col-no a {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+.thread-list .col-no a:visited { color: var(--muted); }
+
+.thread-title { font-size: 14px; }
+.thread-title:visited { color: var(--visited); }
+
+.thread-tags { margin-left: 6px; font-size: 11px; }
+.thread-tags a { color: var(--muted); }
+
+.thread-list .col-author,
+.thread-list .col-reply,
+.thread-list .col-time {
+  font-size: 12px;
+  color: var(--muted);
+}
+.thread-list .col-time { font-size: 11px; white-space: nowrap; }
+.t-short { display: none; }
+
+.empty {
+  padding: 20px 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* ---------------- 分页 ---------------- */
+
+.pagination {
+  margin: 14px 0 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.pagination a,
+.pagination .current {
+  display: inline-block;
+  min-width: 22px;
+  padding: 1px 5px;
+  margin-right: 3px;
+  text-align: center;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.pagination .current {
+  background: #333;
+  border-color: #333;
+  color: #fff;
+  font-weight: bold;
+}
+
+.pagination .page-info { margin-left: 10px; }
+.pagination a:hover { text-decoration: none; background: #e8eefc; }
+
+/* ---------------- 文章 / 串 ---------------- */
+
+.breadcrumb {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+.breadcrumb a { color: var(--muted); }
+.breadcrumb span { margin: 0 3px; }
+
+.thread { margin-top: 6px; }
+
+.post-meta {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 4px 0 6px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.post-meta > * { margin-right: 8px; }
+
+.post-no {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+.post-author { color: #333; }
+.post-cat { color: var(--muted); }
+.post-id {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.po {
+  display: inline-block;
+  padding: 0 3px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  line-height: 1.5;
+  vertical-align: 1px;
+}
+
+.post-title {
+  margin: 10px 0 12px;
+  font-size: 18px;
+  line-height: 1.45;
+  font-weight: bold;
+  color: #111;
+}
+
+.post-content {
+  font-size: 14px;
+  line-height: 1.9;
+  color: #222;
+  overflow-wrap: break-word;
+}
+.post-content p { margin: 0 0 0.9em; }
+
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4 {
+  margin: 1.5em 0 0.6em;
+  line-height: 1.45;
+  font-weight: bold;
+  color: #111;
+}
+.post-content h1 { font-size: 18px; }
+.post-content h2 {
+  font-size: 16px;
+  padding-left: 8px;
+  border-left: 3px solid #333;
+}
+.post-content h3 { font-size: 15px; }
+.post-content h4 { font-size: 14px; }
+
+.post-content ul,
+.post-content ol { margin: 0 0 1em; padding-left: 2em; }
+.post-content li { margin: 0.2em 0; }
+
+.post-content blockquote {
+  margin: 1em 0;
+  padding: 6px 12px;
+  border-left: 3px solid #bbb;
+  background: var(--panel);
+  color: #555;
+}
+.post-content blockquote p { margin: 0.2em 0; }
+
+.post-content code {
+  padding: 0 3px;
+  background: var(--code-bg);
+  border: 1px solid var(--line-soft);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.post-content pre {
+  margin: 1em 0;
+  padding: 9px 11px;
+  background: var(--code-bg);
+  border: 1px solid var(--line-soft);
+  overflow-x: auto;
+  line-height: 1.55;
+}
+.post-content pre code {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 12px;
+}
+
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+}
+
+.post-content figure { margin: 1.2em 0; }
+.post-content figcaption {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.post-content hr {
+  border: 0;
+  border-top: 1px dashed #bbb;
+  margin: 1.6em 0;
+}
+
+.post-content table {
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 13px;
+}
+.post-content th,
+.post-content td {
+  border: 1px solid var(--line);
+  padding: 4px 8px;
+}
+.post-content th { background: var(--panel-2); }
+
+.post-content a { text-decoration: underline; }
+
+.post-content .footnotes {
+  margin-top: 2em;
+  padding-top: 0.8em;
+  border-top: 1px dashed var(--line);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.post-footer {
+  margin-top: 16px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--line);
+  font-size: 12px;
+  color: var(--muted);
+}
+.post-footer .quote-link {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--link);
+}
+.post-tags { margin-left: 10px; }
+.post-tags a { color: var(--muted); }
+.post-edited { margin-left: 8px; color: #999; }
+
+.thread-status {
+  margin: 10px 0;
+  padding: 5px 9px;
+  border: 1px solid var(--line);
+  background: #fafafa;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.thread-nav {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 12px 0 20px;
+  font-size: 12px;
+}
+.thread-nav .spacer { flex: 1; }
+
+/* ---------------- 标签 ---------------- */
+
+.tag-cloud {
+  list-style: none;
+  margin: 10px 0;
+  padding: 0;
+}
+.tag-cloud li {
+  display: inline-block;
+  margin: 0 12px 8px 0;
+  font-size: 13px;
+}
+.tag-cloud .count { color: var(--muted); font-size: 11px; }
+
+/* ---------------- 404 ---------------- */
+
+.error-page {
+  padding: 50px 0 70px;
+  text-align: center;
+}
+.error-code {
+  font-family: var(--mono);
+  font-size: 56px;
+  color: #ccc;
+  letter-spacing: 4px;
+}
+.error-page p { color: var(--muted); }
+
+/* ---------------- 页脚 ---------------- */
+
+.site-footer {
+  margin-top: 28px;
+  padding: 14px 0 22px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.site-footer p { margin: 2px 0; }
+.site-footer a { color: var(--muted); text-decoration: underline; }
+.footer-dim { color: #aaa; }
+
+/* ---------------- 回到顶部 ---------------- */
+
+.to-top {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  padding: 3px 7px;
+  border: 1px solid var(--line);
+  background: #fff;
+  font-size: 11px;
+  color: var(--muted);
+}
+.to-top:visited { color: var(--muted); }
+.to-top:hover { text-decoration: none; background: var(--panel); }
+
+::selection { background: #000080; color: #fff; }
+
+/* ---------------- 窄屏 ---------------- */
+
+@media (max-width: 700px) {
+  .container { padding: 0 8px; }
+
+  .site-header { padding-top: 10px; align-items: flex-start; }
+  .site-brand { width: 100%; }
+  .site-logo { font-size: 19px; }
+  .site-tagline { display: none; }
+
+  .site-nav { width: 100%; align-items: flex-start; margin-top: 4px; }
+  .board-stats { display: none; }
+
+  .thread-list .col-author,
+  .thread-list .col-reply { display: none; }
+  .col-no { width: 74px; }
+  .col-time { width: 80px; }
+  .thread-list td { padding: 6px 4px; }
+  .thread-title { font-size: 13px; }
+  .thread-list .col-time { font-size: 10px; }
+  .t-full { display: none; }
+  .t-short { display: inline; }
+
+  .post-title { font-size: 16px; }
+  .post-content { font-size: 13.5px; }
+
+  .to-top { display: none; }
+  .tag-cloud li { margin-right: 8px; }
+}

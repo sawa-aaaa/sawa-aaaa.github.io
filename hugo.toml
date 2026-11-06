@@ -1,7 +1,58 @@
 baseURL = 'https://sawa-aaaa.github.io/'
-locale = 'en-us'
-title = 'Sawa'
-theme = "PaperMod"
+locale = 'zh-cn'
+defaultContentLanguage = 'zh-cn'
+title = '区舍'
+hasCJKLanguage = true
+enableRobotsTXT = true
+
+[pagination]
+  pagerSize = 20
+
+[markup.highlight]
+  style = 'friendly'
+  noClasses = true
 
 [params]
-  description = 'Sawa 的个人博客'
+  description = 'Sawa 的区舍，今天也在全力蠕动中!'
+  author = 'sawa'
+  authorId = 'sawa'
+  boardName = '文章版'
+
+[params.ui]
+  logo = 'SAWAの'
+  logoAccent = '区舍  '
+  tagline = '今天也在全力蠕动中!'
+
+  idPrefix = 'ID:'
+  poLabel = 'PO'
+
+  noticeTitle = '※文章版'
+  noticeBody = '理性分析or情绪输出?'
+
+  colNo = 'No.'
+  colTitle = '标题'
+  colAuthor = '作者'
+  colReply = '回复'
+  colLastReply = '最后回复'
+  emptyList = '本版尚无主题。'
+  boardStats = '主题 %d · 回复 %d'
+  listCount = '共 %d 个主题。'
+
+  lastModified = '（最后修改：%s）'
+  threadStatus = '本串共 %d 条回复 · 全文 %d 字 · 发表于 %s'
+  backLabel = '返回'
+  prevThread = '上一串'
+  nextThread = '下一串'
+
+  tagsNote = '按字符顺序排列。'
+  footerQuote = '一几一几一几一几一'
+  footerNote = ' 喜欢您来 '
+  notFoundTitle = '啊哦'
+  notFoundMeta = '页面不存在'
+
+  toTop = '↑ 顶部'
+  toTopTitle = '回到顶部'
+  paginationPrev = '‹ 上一页'
+  paginationNext = '下一页 ›'
+  paginationInfo = '第 %d / %d 页'
+  weekdays = '日,一,二,三,四,五,六'

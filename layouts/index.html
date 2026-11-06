@@ -1,0 +1,10 @@
+{{ define "main" }}
+<div class="notice">
+  <strong>{{ site.Params.ui.noticeTitle }}</strong>
+  {{ site.Params.ui.noticeBody }}
+</div>
+{{- $pages := where site.RegularPages "Section" "posts" }}
+{{- $paginator := .Paginate $pages }}
+{{ partial "thread-list.html" $paginator.Pages }}
+{{ partial "pagination.html" $paginator }}
+{{ end }}

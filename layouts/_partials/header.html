@@ -1,0 +1,23 @@
+{{- /* 顶部导航：文章版是父级，标签是它的子集 */ -}}
+<header class="site-header">
+  <div class="site-brand">
+    <a class="site-logo" href="{{ "/" | relURL }}">{{ site.Params.ui.logo }}<span class="island">{{ site.Params.ui.logoAccent }}</span></a>
+    <span class="site-tagline">{{ site.Params.ui.tagline }}</span>
+  </div>
+  <nav class="site-nav">
+    <div class="nav-board">
+      <a class="board-link" href="{{ "/" | relURL }}">{{ site.Params.boardName }}</a>
+      {{- if .IsHome }}
+      <span class="board-stats">{{ printf site.Params.ui.boardStats (len (where site.RegularPages "Section" "posts")) 0 }}</span>
+      {{- end }}
+    </div>
+    {{- with site.Taxonomies.tags }}
+    <div class="nav-tags">
+      <span class="tree">└</span>
+      {{- range .ByCount }}
+      <a href="{{ .Page.RelPermalink }}"{{ if eq $.RelPermalink .Page.RelPermalink }} class="active"{{ end }}>{{ .Page.Title }}</a>
+      {{- end }}
+    </div>
+    {{- end }}
+  </nav>
+</header>

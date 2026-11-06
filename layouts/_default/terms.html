@@ -1,0 +1,11 @@
+{{ define "main" }}
+<div class="notice">
+  <strong>※ {{ .Title }}</strong>
+  {{ site.Params.ui.tagsNote }}
+</div>
+<ul class="tag-cloud">
+  {{- range .Data.Terms.Alphabetical }}
+  <li><a href="{{ .Page.RelPermalink }}">[{{ .Page.Title }}]</a> <span class="count">{{ .Count }}</span></li>
+  {{- end }}
+</ul>
+{{ end }}

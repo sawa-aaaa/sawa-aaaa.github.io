@@ -1,0 +1,34 @@
+<table class="thread-list">
+  <thead>
+    <tr>
+      <th class="col-no">{{ site.Params.ui.colNo }}</th>
+      <th class="col-title">{{ site.Params.ui.colTitle }}</th>
+      <th class="col-author">{{ site.Params.ui.colAuthor }}</th>
+      <th class="col-reply">{{ site.Params.ui.colReply }}</th>
+      <th class="col-time">{{ site.Params.ui.colLastReply }}</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{- if . }}
+    {{- range . }}
+    <tr>
+      <td class="col-no"><a href="{{ .RelPermalink }}">{{ site.Params.ui.colNo }}{{ partial "post-id.html" . }}</a></td>
+      <td class="col-title">
+        <a class="thread-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{- with .Params.tags }}<span class="thread-tags">
+          {{- range . }}{{ $tag := . }}{{ with site.GetPage (printf "/tags/%s" $tag) }}<a href="{{ .RelPermalink }}">[{{ $tag }}]</a> {{ end }}{{ end -}}
+        </span>{{ end }}
+      </td>
+      <td class="col-author">{{ site.Params.author }}</td>
+      <td class="col-reply">0</td>
+      <td class="col-time">
+        <span class="t-full">{{ partial "time.html" .Date }}</span>
+        <span class="t-short">{{ .Date.Format "01-02 15:04" }}</span>
+      </td>
+    </tr>
+    {{- end }}
+  {{- else }}
+    <tr><td colspan="5" class="empty">{{ site.Params.ui.emptyList }}</td></tr>
+  {{- end }}
+  </tbody>
+</table>
